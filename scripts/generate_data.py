@@ -59,4 +59,6 @@ for file in csv_files:
     for chunk in iterator:
         chunk.to_sql(table_name, con=engine, if_exists='append', index=False, dtype=dtype_dict)
 
-print(f"Data INSERT on {table_name}")
+    print(f"Data INSERT on {table_name}")
+
+print("Generate data finished")

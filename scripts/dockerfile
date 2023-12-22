@@ -8,5 +8,5 @@ WORKDIR /app
 
 RUN pip install -r requirements.txt
 
-# CMD ["tail", "-f", "/dev/null"]
-CMD ["python", "generate_data.py"]
+CMD ["tail", "-f", "/dev/null"]
+# CMD ["python", "generate_data.py"]
