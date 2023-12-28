@@ -42,22 +42,21 @@ for file in csv_files:
     table_name = table_name.split('/')[-1].split('.')[0]
     chunksize = 1000000
     iterator = pd.read_csv(filepath_or_buffer=file, sep=',', header=0, chunksize=chunksize)
-    first_chunk = next(iterator)
 
-    dtype_dict = {
-        col: VARCHAR() if dtype == 'object'
-        else FLOAT() if dtype == 'float64'
-        else INTEGER() if dtype == 'int64'
-        else BOOLEAN() if dtype == 'bool'
-        else VARCHAR()
-        for col, dtype in first_chunk.dtypes.items()
-    }
+    for i, chunk in enumerate(iterator):
+        chunk['row_id'] = range(i * chunksize, i * chunksize + len(chunk))
 
-    first_chunk.to_sql(table_name, con=engine, if_exists='replace', index=False, dtype=dtype_dict)
-    del first_chunk
+        dtype_dict = {
+            col: VARCHAR() if dtype == 'object'
+            else FLOAT() if dtype == 'float64'
+            else INTEGER() if dtype == 'int64'
+            else BOOLEAN() if dtype == 'bool'
+            else VARCHAR()
+            for col, dtype in chunk.dtypes.items()
+        }
 
-    for chunk in iterator:
-        chunk.to_sql(table_name, con=engine, if_exists='append', index=False, dtype=dtype_dict)
+        if_exists_method = 'replace' if i == 0 else 'append'
+        chunk.to_sql(table_name, con=engine, if_exists=if_exists_method, index=False, dtype=dtype_dict)
 
     print(f"Data INSERT on {table_name}")
 

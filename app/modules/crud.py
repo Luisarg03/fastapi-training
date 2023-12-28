@@ -1,6 +1,10 @@
 from sqlalchemy.orm import Session
-from . import models, schemas
+from . import models
 
 
-def get_data(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.t_data_sciences_salaries).offset(skip).limit(limit).all()
+def get_data_data_science(db: Session):
+    return db.query(models.DataScienceSalary).order_by(models.DataScienceSalary.row_id)
+
+
+def get_data_pokemon(db: Session):
+    return db.query(models.PokemonDataMaster).order_by(models.PokemonDataMaster.row_id)

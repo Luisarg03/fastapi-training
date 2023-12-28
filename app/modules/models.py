@@ -1,64 +1,54 @@
-# SQLAlchemy models for the database tables
-from sqlalchemy import Boolean, Column, Double, Integer, MetaData, String, Table
-from sqlalchemy.orm.base import Mapped
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, String, Float, Integer
 
-metadata = MetaData()
-
-t_data_sciences_salaries = Table(
-    'data_sciences_salaries', metadata,
-    Column('work_year', Integer),
-    Column('experience_level', String),
-    Column('employment_type', String),
-    Column('job_title', String),
-    Column('salary', Integer),
-    Column('salary_currency', String),
-    Column('salary_in_usd', Integer),
-    Column('employee_residence', String),
-    Column('remote_ratio', Integer),
-    Column('company_location', String),
-    Column('company_size', String)
-)
+Base = declarative_base()
 
 
-t_pokemon_tcg_data_master = Table(
-    'pokemon_tcg_data_master', metadata,
-    Column('id', String),
-    Column('set', String),
-    Column('series', String),
-    Column('publisher', String),
-    Column('generation', String),
-    Column('release_date', String),
-    Column('artist', String),
-    Column('name', String),
-    Column('set_num', String),
-    Column('types', String),
-    Column('supertype', String),
-    Column('subtypes', String),
-    Column('level', String),
-    Column('hp', Double(53)),
-    Column('evolvesFrom', String),
-    Column('evolvesTo', String),
-    Column('abilities', String),
-    Column('attacks', String),
-    Column('weaknesses', String),
-    Column('retreatCost', String),
-    Column('convertedRetreatCost', Double(53)),
-    Column('rarity', String),
-    Column('flavorText', String),
-    Column('nationalPokedexNumbers', String),
-    Column('legalities', String),
-    Column('resistances', String),
-    Column('rules', String),
-    Column('regulationMark', String),
-    Column('ancientTrait', String)
-)
+class DataScienceSalary(Base):
+    __tablename__ = "data_sciences_salaries"
+    row_id = Column(Integer, primary_key=True)
+    work_year = Column(Integer)
+    experience_level = Column(String)
+    employment_type = Column(String)
+    job_title = Column(String)
+    salary = Column(Integer)
+    salary_currency = Column(String)
+    salary_in_usd = Column(Integer)
+    employee_residence = Column(String)
+    remote_ratio = Column(Integer)
+    company_location = Column(String)
+    company_size = Column(String)
 
 
-t_train_essays_v1 = Table(
-    'train_essays_v1', metadata,
-    Column('text', String),
-    Column('label', Integer),
-    Column('prompt_name', String),
-    Column('source', String),
-    Column('RDizzl3_seven', Boolean)
-)
+class PokemonDataMaster(Base):
+    __tablename__ = 'pokemon_tcg_data_master'
+    row_id = Column(Integer, primary_key=True)
+    id = Column(String)
+    set = Column(String)
+    series = Column(String)
+    publisher = Column(String)
+    generation = Column(String)
+    release_date = Column(String)
+    artist = Column(String)
+    name = Column(String)
+    set_num = Column(String)
+    types = Column(String)
+    supertype = Column(String)
+    subtypes = Column(String)
+    level = Column(String)
+    hp = Column(Float)
+    evolvesFrom = Column(String)
+    evolvesTo = Column(String)
+    abilities = Column(String)
+    attacks = Column(String)
+    weaknesses = Column(String)
+    retreatCost = Column(String)
+    convertedRetreatCost = Column(Float)
+    rarity = Column(String)
+    flavorText = Column(String)
+    nationalPokedexNumbers = Column(String)
+    legalities = Column(String)
+    resistances = Column(String)
+    rules = Column(String)
+    regulationMark = Column(String)
+    ancientTrait = Column(String)
