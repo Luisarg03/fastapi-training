@@ -4,6 +4,16 @@ from sqlalchemy import Column, String, Float, Integer
 Base = declarative_base()
 
 
+class UsersApi(Base):
+    __tablename__ = "users_api"
+    row_id = Column(Integer, primary_key=True)
+    username = Column(String)
+    full_name = Column(String)
+    email = Column(String)
+    password = Column(String)
+    disabled = Column(String)
+
+
 class DataScienceSalary(Base):
     __tablename__ = "data_sciences_salaries"
     row_id = Column(Integer, primary_key=True)

@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Double, Integer, MetaData, String, Table
+from sqlalchemy import BigInteger, Boolean, Column, Double, Integer, MetaData, String, Table, Text
 from sqlalchemy.orm.base import Mapped
 
 metadata = MetaData()
@@ -64,4 +64,15 @@ t_train_essays_v1 = Table(
     Column('source', String),
     Column('RDizzl3_seven', Boolean),
     Column('row_id', Integer)
+)
+
+
+t_users_api = Table(
+    'users_api', metadata,
+    Column('username', Text),
+    Column('full_name', Text),
+    Column('email', Text),
+    Column('password', Text),
+    Column('disabled', Text),
+    Column('row_id', BigInteger)
 )

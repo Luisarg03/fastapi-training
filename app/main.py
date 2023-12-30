@@ -1,7 +1,10 @@
+from typing import Annotated
+
 from fastapi import FastAPI, Depends, Query
 from fastapi_pagination import add_pagination
 from fastapi_pagination.cursor import CursorPage
 from fastapi_pagination.ext.sqlalchemy import paginate
+from fastapi.security import OAuth2PasswordBearer
 
 from sqlalchemy.orm import Session
 from modules.database import SessionLocal
@@ -14,6 +17,8 @@ CursorPage = CursorPage.with_custom_options(
 
 app = FastAPI()
 add_pagination(app)
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
 # Dependency
@@ -28,6 +33,11 @@ def get_db():
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
+
+
+@app.get("/test/")
+async def read_test(token: Annotated[str, Depends(oauth2_scheme)]):
+    return {"token": token}
 
 
 @app.get("/getdata/datascience/", response_model=CursorPage[schemas.DataScienceSalary])

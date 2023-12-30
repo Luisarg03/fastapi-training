@@ -11,6 +11,8 @@ services:
       - DATABASE_USER=myuser
       - DATABASE_PASSWORD=mypassword
       - DATABASE_NAME=mydatabase
+      - DIGEST=4854e434b9cab3ee2e3db738616d59251b70
+      - ROUNDS=15
     depends_on:
       - db
     networks:
