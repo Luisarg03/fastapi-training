@@ -4,12 +4,9 @@ from typing import Optional
 
 # Esquema para la lectura de datos (por ejemplo, para respuestas de la API)
 class UsersApi(BaseModel):
-    row_id: int
     username: str
-    full_name: str
-    email: str
     password: str
-    disabled: str
+    disabled: bool
 
     class Config:
         orm_mode = True
