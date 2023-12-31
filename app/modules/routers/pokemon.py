@@ -1,10 +1,9 @@
 from fastapi import APIRouter, Depends
 from modules import crud, schemas
-
+from modules.conf import cursor_confs, get_db
 from sqlalchemy.orm import Session
-
 from fastapi_pagination.ext.sqlalchemy import paginate
-from .conf import cursor_confs, get_db
+
 
 CursorPage = cursor_confs()
 router = APIRouter()

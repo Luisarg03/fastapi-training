@@ -7,3 +7,4 @@ sqlakeyset==2.0.1701229837
 sqlacodegen-v2==0.1.4
 psycopg2
 python-jose[cryptography]
+python-dotenv

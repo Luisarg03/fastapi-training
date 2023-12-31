@@ -1,6 +1,6 @@
 from fastapi import Query
 from fastapi_pagination.cursor import CursorPage
-from modules.database import SessionLocal
+from .database import SessionLocal
 
 
 def cursor_confs():
